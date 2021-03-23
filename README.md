@@ -29,6 +29,9 @@ O Zup Orange Talents é um programa da Zup para suprir a escassez de profissiona
 
 - [Tópicos](#tópicos)
 - [Grade Curricular](#grade-curricular)
+- [Desafio Casa do Código](#desafio-casa-do-código)
+  - [Atividades](#atividades)
+    - [Cadastro novo autor](#cadastro-novo-autor)
 
 # Grade Curricular
 
@@ -49,3 +52,25 @@ Serão abordados os seguintes temas:
 
 Este primeiro desafio é uma forma de pôr em prática os conceitos 
 ensinados ao longo das primeiras semanas.
+
+## Atividades
+
+Ao longo deste projeto, será necessário a realização de algumas atividades para atestar o conhecimento adquirido. As atividades devem ser resolvidas estritamente de acordo com o enunciado.
+
+### Cadastro novo autor
+
+É necessário cadastrar um novo autor no sistema. Todo autor tem um nome, email e uma descrição. Também queremos saber o instante exato que ele foi registrado.
+
+#### Restrições
+
+- O instante não pode ser nulo
+- O email é obrigatório
+- O email tem que ter formato válido
+- O nome é obrigatório
+- A descrição é obrigatória e não pode passar de 400 caracteres
+
+#### Resultado esperado
+
+- Um novo autor criado e status 200 retornado
+
+[Voltar ao menu](#tópicos)
