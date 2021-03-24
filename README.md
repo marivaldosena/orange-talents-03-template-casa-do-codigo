@@ -30,11 +30,11 @@ O Zup Orange Talents é um programa da Zup para suprir a escassez de profissiona
 - [Tópicos](#tópicos)
 - [Grade Curricular](#grade-curricular)
 - [Desafio Casa do Código](#desafio-casa-do-código)
-  - [Atividades](#atividades)
-    - [Cadastro novo autor](#cadastro-novo-autor)
-      - [Implementação do Cadastro novo autor](#implementação-do-cadastro-novo-autor)
-    - [Cadastro de email único](#cadastro-de-email-único)
-      - [Implementação do Cadastro de email único](#implementação-do-cadastro-de-email-único)
+- [Atividades](#atividades)
+  - [Cadastro novo autor](#cadastro-novo-autor)
+    - [Implementação do Cadastro novo autor](#implementação-do-cadastro-novo-autor)
+  - [Cadastro de email único](#cadastro-de-email-único)
+    - [Implementação do Cadastro de email único](#implementação-do-cadastro-de-email-único)
 
 # Grade Curricular
 
@@ -56,15 +56,15 @@ Serão abordados os seguintes temas:
 Este primeiro desafio é uma forma de pôr em prática os conceitos 
 ensinados ao longo das primeiras semanas.
 
-## Atividades
+# Atividades
 
 Ao longo deste projeto, será necessário a realização de algumas atividades para atestar o conhecimento adquirido. As atividades devem ser resolvidas estritamente de acordo com o enunciado.
 
-### Cadastro novo autor
+## Cadastro novo autor
 
 É necessário cadastrar um novo autor no sistema. Todo autor tem um nome, email e uma descrição. Também queremos saber o instante exato que ele foi registrado.
 
-#### Restrições
+### Restrições
 
 - <span style="color: green;">&check;</span> O instante não pode ser nulo
 - <span style="color: green;">&check;</span> O email é obrigatório
@@ -72,13 +72,13 @@ Ao longo deste projeto, será necessário a realização de algumas atividades p
 - <span style="color: green;">&check;</span> O nome é obrigatório
 - <span style="color: green;">&check;</span> A descrição é obrigatória e não pode passar de 400 caracteres
 
-#### Resultado esperado
+### Resultado esperado
 
 - <span style="color: green;">&check;</span> Um novo autor criado e status 200 retornado
 
 [Voltar ao menu](#tópicos)
 
-#### Implementação do Cadastro novo autor
+### Implementação do Cadastro novo autor
 
 Para concluir esta tarefa, eu dividiria em etapas. A primeira etapa, seria a criação de entidade. A entidade Autor teria os seguintes campos:
 
@@ -115,16 +115,32 @@ Acredito que o tipo de dados de retorno deva ser um ResponseEntity com o tipo ge
 
 [Voltar ao menu](#tópicos)
 
-### Cadastro de email único
+## Cadastro de email único
 
 O sistema deve permitir apenas e-mails únicos.
 
-#### Restrições
+### Restrições
 
 - <span style="color: red;">&cross;</span> O email do autor precisa ser único no sistema
 
-#### Resultado esperado
+### Resultado esperado
 
 - <span style="color: red;">&cross;</span> Erro de validação no caso de email duplicado
+
+[Voltar ao menu](#tópicos)
+
+### Implementação do Cadastro de email único
+
+Para impedir a duplicação de e-mails, terei de incluir unique = true na anotação @Column do atributo email na classe Autor para fazer com que o Data Definition Language (DDL) da tabela seja alterado para refletir as últimas mudanças. Dessa forma, essa regra estará presente no banco de dados.
+
+Além de alterar o DDL da entidade, é necessário incluir alguma forma de verificação de e-mails duplicados no CadastroDeAutorForm para validar na fronteira de entrada de dados. Sendo assim, poderíamos impedir que o fluxo de dados prosseguisse desnecessariamente.
+
+Há algumas formas de fazer essa validação. A primeira pode ser utilizando o Repository no construtor do Form e verificando se existe um valor duplicado. Essa é a forma mais simples para resolver este problema. No entanto, pode aumentar o acoplamento entre camadas que, em teoria, deveriam se manter separadas.
+
+Outra opção é criar uma anotação que faça esse tipo de tarefa. Dessa forma, haveria menor acoplamento e, se a anotação for genérica o suficiente, poderia ser reaproveitada para outras classes e campos.
+
+Outra possível solução seria validar no próprio controlador e fazer deixar as outras validações para o Form.
+
+Acho que, neste momento, para manter a solução simples e diminiuir a carga intrínseca, é melhor passar o Repository para o Form.
 
 [Voltar ao menu](#tópicos)
