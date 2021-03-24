@@ -75,7 +75,7 @@ Ao longo deste projeto, será necessário a realização de algumas atividades p
 
 [Voltar ao menu](#tópicos)
 
-#### Implementação
+### Implementação
 
 Para concluir esta tarefa, eu dividiria em etapas. A primeira etapa, seria a criação de entidade. A entidade Autor teria os seguintes campos:
 
@@ -109,3 +109,5 @@ Além desses, é necessário criar um Controlador para atender às requisições
 Este controlador deve possuir um método chamado cadastrarAutor para o cadastro de autores. O parâmetro deve ser um Form Value Object que citei anteriormente e ele deve possuir duas anotações: @RequestBody para fazer o tratamento de dados (parsing) enviados pelo lado cliente e @Valid para validação de dados. Além desse parâmetro, é interessante ter outro do tipo UriComponentsBuilder para criação de URIs. Dessa forma, podemos retornar o endereço do recurso recém-criado no cabeçalho da resposta.
 
 Acredito que o tipo de dados de retorno deva ser um ResponseEntity com o tipo genérico do DTO de resposta.
+
+[Voltar ao menu](#tópicos)
