@@ -32,6 +32,9 @@ O Zup Orange Talents é um programa da Zup para suprir a escassez de profissiona
 - [Desafio Casa do Código](#desafio-casa-do-código)
   - [Atividades](#atividades)
     - [Cadastro novo autor](#cadastro-novo-autor)
+      - [Implementação do Cadastro novo autor](#implementação-do-cadastro-novo-autor)
+    - [Cadastro de email único](#cadastro-de-email-único)
+      - [Implementação do Cadastro de email único](#implementação-do-cadastro-de-email-único)
 
 # Grade Curricular
 
@@ -63,19 +66,19 @@ Ao longo deste projeto, será necessário a realização de algumas atividades p
 
 #### Restrições
 
-- O instante não pode ser nulo
-- O email é obrigatório
-- O email tem que ter formato válido
-- O nome é obrigatório
-- A descrição é obrigatória e não pode passar de 400 caracteres
+- <span style="color: green;">&check;</span> O instante não pode ser nulo
+- <span style="color: green;">&check;</span> O email é obrigatório
+- <span style="color: green;">&check;</span> O email tem que ter formato válido
+- <span style="color: green;">&check;</span> O nome é obrigatório
+- <span style="color: green;">&check;</span> A descrição é obrigatória e não pode passar de 400 caracteres
 
 #### Resultado esperado
 
-- Um novo autor criado e status 200 retornado
+- <span style="color: green;">&check;</span> Um novo autor criado e status 200 retornado
 
 [Voltar ao menu](#tópicos)
 
-### Implementação
+#### Implementação do Cadastro novo autor
 
 Para concluir esta tarefa, eu dividiria em etapas. A primeira etapa, seria a criação de entidade. A entidade Autor teria os seguintes campos:
 
@@ -109,5 +112,19 @@ Além desses, é necessário criar um Controlador para atender às requisições
 Este controlador deve possuir um método chamado cadastrarAutor para o cadastro de autores. O parâmetro deve ser um Form Value Object que citei anteriormente e ele deve possuir duas anotações: @RequestBody para fazer o tratamento de dados (parsing) enviados pelo lado cliente e @Valid para validação de dados. Além desse parâmetro, é interessante ter outro do tipo UriComponentsBuilder para criação de URIs. Dessa forma, podemos retornar o endereço do recurso recém-criado no cabeçalho da resposta.
 
 Acredito que o tipo de dados de retorno deva ser um ResponseEntity com o tipo genérico do DTO de resposta.
+
+[Voltar ao menu](#tópicos)
+
+### Cadastro de email único
+
+O sistema deve permitir apenas e-mails únicos.
+
+#### Restrições
+
+- <span style="color: red;">&cross;</span> O email do autor precisa ser único no sistema
+
+#### Resultado esperado
+
+- <span style="color: red;">&cross;</span> Erro de validação no caso de email duplicado
 
 [Voltar ao menu](#tópicos)
