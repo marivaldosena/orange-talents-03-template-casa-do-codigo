@@ -1,6 +1,7 @@
 package com.github.marivaldosena.casadocodigo.form;
 
 import com.github.marivaldosena.casadocodigo.entity.Autor;
+import com.github.marivaldosena.casadocodigo.entity.EmailUnicoConstraint;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
@@ -15,6 +16,7 @@ public class CadastroDeAutorForm {
     @NotNull
     @NotEmpty
     @Email
+    @EmailUnicoConstraint
     private String email;
 
     @NotNull

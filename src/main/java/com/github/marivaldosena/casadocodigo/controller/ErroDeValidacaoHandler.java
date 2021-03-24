@@ -1,6 +1,7 @@
 package com.github.marivaldosena.casadocodigo.controller;
 
 import com.github.marivaldosena.casadocodigo.dto.CadastroDeAutorErrorDto;
+import com.github.marivaldosena.casadocodigo.entity.ErrosDto;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.http.HttpStatus;
@@ -23,7 +24,7 @@ public class ErroDeValidacaoHandler {
 
     @ResponseStatus(code = HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public List<CadastroDeAutorErrorDto> handle(MethodArgumentNotValidException exception) {
+    public ErrosDto handle(MethodArgumentNotValidException exception) {
         List<CadastroDeAutorErrorDto> listaDeErros = new ArrayList<>();
 
         List<FieldError> fieldErrors = exception.getBindingResult().getFieldErrors();
@@ -33,6 +34,6 @@ public class ErroDeValidacaoHandler {
             listaDeErros.add(dto);
         });
 
-        return listaDeErros;
+        return new ErrosDto(listaDeErros);
     }
 }
