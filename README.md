@@ -35,6 +35,7 @@ O Zup Orange Talents é um programa da Zup para suprir a escassez de profissiona
     - [Implementação do Cadastro novo autor](#implementação-do-cadastro-novo-autor)
   - [Cadastro de email único](#cadastro-de-email-único)
     - [Implementação do Cadastro de email único](#implementação-do-cadastro-de-email-único)
+    - [Alterações de implementação do cadastro de email único](#alterações-de-implementação-do-cadastro-de-email-único)
 
 # Grade Curricular
 
@@ -121,11 +122,11 @@ O sistema deve permitir apenas e-mails únicos.
 
 ### Restrições
 
-- <span style="color: red;">&cross;</span> O email do autor precisa ser único no sistema
+- <span style="color: green;">&check;</span> O email do autor precisa ser único no sistema
 
 ### Resultado esperado
 
-- <span style="color: red;">&cross;</span> Erro de validação no caso de email duplicado
+- <span style="color: green;">&check;</span> Erro de validação no caso de email duplicado
 
 [Voltar ao menu](#tópicos)
 
@@ -142,5 +143,18 @@ Outra opção é criar uma anotação que faça esse tipo de tarefa. Dessa forma
 Outra possível solução seria validar no próprio controlador e fazer deixar as outras validações para o Form.
 
 Acho que, neste momento, para manter a solução simples e diminiuir a carga intrínseca, é melhor passar o Repository para o Form.
+
+[Voltar ao menu](#tópicos)
+
+### Alterações de implementação do cadastro de email único
+
+A solução que havia pensado com a inclusão de AutorRepository como parâmetro do construtor de CadastroDeAutorForm não é elegante, já que aumenta o acoplamento entre as camadas. Além disso, o erro retornado seria IllegalArgumentException se quisesse manter o Form sem pacotes que lidem com HTTP. Por este motivo, tive que optar pela solução que havia proposto com anotações, já que é o que possui menor acoplamento.
+
+Como mencionei, a implementação que fiz foi um pouco diferente da que o especialista utilizou, mas semanticamente equivalentes. No meu caso, usei um ConstraintValidator e uma anotação ambos provenientes do pacote javax.validation.
+
+Usei a documentação do Spring e o seguinte link como referência: https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#validation-beanvalidation-spring-constraints. 
+Meu código permite que o Controller continue inalterado e a única adição ao CadastroDeAutorForm seria a anotação @EmailUnicoConstraint no atributo email. Fora isso, seriam criadas uma interface e uma implementação do ConstraintValidator.
+
+A outra possibilidade, conforme mostrado pelo especialista, seria utilizar as validações do próprio Spring, ao invés do pacote javax.validation.
 
 [Voltar ao menu](#tópicos)
