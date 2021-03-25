@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import javax.transaction.Transactional;
 import javax.validation.Valid;
 import java.net.URI;
 
@@ -23,6 +24,7 @@ public class CategoriaController {
     }
 
     @PostMapping
+    @Transactional
     public ResponseEntity<CategoriaDto> cadastrarCategoria(@RequestBody @Valid CadastroDeCategoriaForm form, UriComponentsBuilder uriBuilder) {
         Categoria categoria = form.toEntity();
         categoriaRepository.save(categoria);

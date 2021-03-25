@@ -4,10 +4,12 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.github.marivaldosena.casadocodigo.constraints.ValorUnico;
 import com.sun.istack.NotNull;
 
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
 public class CadastroDeCategoriaForm {
     @NotNull
+    @NotEmpty
     @Size(min = 2, max = 120)
     @ValorUnico(entidade = Categoria.class, campo = "nome")
     private String nome;
