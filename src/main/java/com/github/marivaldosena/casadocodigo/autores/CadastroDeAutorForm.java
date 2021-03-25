@@ -15,7 +15,7 @@ public class CadastroDeAutorForm {
     @NotNull
     @NotEmpty
     @Email
-    @ValorUnico
+    @ValorUnico(entidade = Autor.class, campo = "email")
     private String email;
 
     @NotNull

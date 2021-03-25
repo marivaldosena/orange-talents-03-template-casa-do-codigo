@@ -1,25 +1,33 @@
 package com.github.marivaldosena.casadocodigo.constraints;
 
-import com.github.marivaldosena.casadocodigo.autores.AutorRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
+import java.util.List;
 
 public class ValorUnicoValidator implements ConstraintValidator<ValorUnico, String> {
-    private AutorRepository autorRepository;
+    @PersistenceContext
+    private EntityManager manager;
 
-    @Autowired
-    public ValorUnicoValidator(AutorRepository repository) {
-        this.autorRepository = repository;
-    }
+    private String campo;
+    private Class<?> entidade;
 
     @Override
     public void initialize(ValorUnico valorUnico) {
+        this.campo = valorUnico.campo();
+        this.entidade = valorUnico.entidade();
     }
 
     @Override
-    public boolean isValid(String campo, ConstraintValidatorContext context) {
-        return campo != null && !autorRepository.findByEmail(campo).isPresent();
+    public boolean isValid(String valor, ConstraintValidatorContext context) {
+        String jpql = "SELECT 1 FROM " + entidade.getName() + " WHERE " + campo + " = :valor";
+        Query query = manager.createQuery(jpql);
+        query.setParameter("valor", valor);
+
+        List<?> listaDeRegistros = query.getResultList();
+
+        return listaDeRegistros.isEmpty();
     }
 }
