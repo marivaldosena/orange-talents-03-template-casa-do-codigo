@@ -4,9 +4,9 @@ import java.util.Collections;
 import java.util.List;
 
 public class ErrosDto {
-    private List<CadastroDeAutorErrorDto> listaDeErros;
+    private List<CampoComErroDto> listaDeErros;
 
-    public ErrosDto(List<CadastroDeAutorErrorDto> listaDeErros) {
+    public ErrosDto(List<CampoComErroDto> listaDeErros) {
         this.listaDeErros = listaDeErros;
     }
 

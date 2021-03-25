@@ -1,6 +1,6 @@
 package com.github.marivaldosena.casadocodigo.erros;
 
-public class CadastroDeAutorErrorDto {
+public class CampoComErroDto {
     private String campo;
     private String erro;
 
@@ -9,7 +9,7 @@ public class CadastroDeAutorErrorDto {
      * @param campo Campo inválido
      * @param erro Mensagem de erro
      */
-    public CadastroDeAutorErrorDto(String campo, String erro) {
+    public CampoComErroDto(String campo, String erro) {
         this.campo = campo;
         this.erro = erro;
     }

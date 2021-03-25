@@ -26,7 +26,7 @@ public class AutorController {
     @PostMapping
     @Transactional
     public ResponseEntity<AutorResponseDto> cadastrarAutor(@RequestBody @Valid CadastroDeAutorForm form, UriComponentsBuilder uriBuilder) {
-        Autor autor = form.converter();
+        Autor autor = form.toEntity();
         autorRepository.save(autor);
         URI uri = uriBuilder.path(CAMINHO_DO_RECURSO + "/{id}").buildAndExpand(autor.getId()).toUri();
         return ResponseEntity.ok().header("Location", uri.toString()).body(new AutorResponseDto(autor));
