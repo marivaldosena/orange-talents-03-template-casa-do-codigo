@@ -36,6 +36,7 @@ O Zup Orange Talents é um programa da Zup para suprir a escassez de profissiona
   - [Cadastro de email único](#cadastro-de-email-único)
     - [Implementação do Cadastro de email único](#implementação-do-cadastro-de-email-único)
     - [Alterações de implementação do cadastro de email único](#alterações-de-implementação-do-cadastro-de-email-único)
+  - [Cadastro de categoria](#cadastro-de-categoria)
 
 # Grade Curricular
 
@@ -156,5 +157,21 @@ Usei a documentação do Spring e o seguinte link como referência: https://docs
 Meu código permite que o Controller continue inalterado e a única adição ao CadastroDeAutorForm seria a anotação @EmailUnicoConstraint no atributo email. Fora isso, seriam criadas uma interface e uma implementação do ConstraintValidator.
 
 A outra possibilidade, conforme mostrado pelo especialista, seria utilizar as validações do próprio Spring, ao invés do pacote javax.validation.
+
+[Voltar ao menu](#tópicos)
+
+## Cadastro de categoria
+
+Toda categoria precisa de um nome
+
+### Restrições
+
+- O nome é obrigatório
+- O nome não pode ser duplicado
+
+### Resultado esperado
+
+- Uma nova categoria cadastrada no sistema e status 200 de retorno
+- Caso alguma restrição não seja atendida, retorne 400 e um JSON informando os problemas de validação
 
 [Voltar ao menu](#tópicos)
