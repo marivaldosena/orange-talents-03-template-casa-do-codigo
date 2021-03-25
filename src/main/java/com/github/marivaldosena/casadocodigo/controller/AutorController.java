@@ -33,6 +33,6 @@ public class AutorController {
         Autor autor = form.converter();
         autorRepository.save(autor);
         URI uri = uriBuilder.path(CAMINHO_DO_RECURSO + "/{id}").buildAndExpand(autor.getId()).toUri();
-        return ResponseEntity.ok(new AutorResponseDto(autor));
+        return ResponseEntity.ok().header("Location", uri.toString()).body(new AutorResponseDto(autor));
     }
 }
