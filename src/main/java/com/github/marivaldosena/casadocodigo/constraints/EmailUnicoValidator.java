@@ -1,6 +1,6 @@
-package com.github.marivaldosena.casadocodigo.entity;
+package com.github.marivaldosena.casadocodigo.constraints;
 
-import com.github.marivaldosena.casadocodigo.repository.AutorRepository;
+import com.github.marivaldosena.casadocodigo.autores.AutorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.validation.ConstraintValidator;

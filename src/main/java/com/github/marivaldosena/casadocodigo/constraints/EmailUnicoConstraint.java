@@ -1,4 +1,4 @@
-package com.github.marivaldosena.casadocodigo.entity;
+package com.github.marivaldosena.casadocodigo.constraints;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;

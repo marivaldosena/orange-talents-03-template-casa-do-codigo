@@ -1,4 +1,4 @@
-package com.github.marivaldosena.casadocodigo.entity;
+package com.github.marivaldosena.casadocodigo.autores;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;

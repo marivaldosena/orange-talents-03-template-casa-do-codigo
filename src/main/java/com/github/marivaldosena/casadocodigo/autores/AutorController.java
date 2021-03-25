@@ -1,9 +1,5 @@
-package com.github.marivaldosena.casadocodigo.controller;
+package com.github.marivaldosena.casadocodigo.autores;
 
-import com.github.marivaldosena.casadocodigo.dto.AutorResponseDto;
-import com.github.marivaldosena.casadocodigo.entity.Autor;
-import com.github.marivaldosena.casadocodigo.form.CadastroDeAutorForm;
-import com.github.marivaldosena.casadocodigo.repository.AutorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;

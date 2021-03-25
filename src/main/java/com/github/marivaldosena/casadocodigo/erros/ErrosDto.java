@@ -1,6 +1,4 @@
-package com.github.marivaldosena.casadocodigo.entity;
-
-import com.github.marivaldosena.casadocodigo.dto.CadastroDeAutorErrorDto;
+package com.github.marivaldosena.casadocodigo.erros;
 
 import java.util.Collections;
 import java.util.List;

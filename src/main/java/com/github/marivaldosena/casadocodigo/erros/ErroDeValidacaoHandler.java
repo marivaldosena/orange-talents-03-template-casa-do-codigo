@@ -1,7 +1,5 @@
-package com.github.marivaldosena.casadocodigo.controller;
+package com.github.marivaldosena.casadocodigo.erros;
 
-import com.github.marivaldosena.casadocodigo.dto.CadastroDeAutorErrorDto;
-import com.github.marivaldosena.casadocodigo.entity.ErrosDto;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.http.HttpStatus;

@@ -1,4 +1,4 @@
-package com.github.marivaldosena.casadocodigo.dto;
+package com.github.marivaldosena.casadocodigo.erros;
 
 public class CadastroDeAutorErrorDto {
     private String campo;

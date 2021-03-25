@@ -1,6 +1,4 @@
-package com.github.marivaldosena.casadocodigo.dto;
-
-import com.github.marivaldosena.casadocodigo.entity.Autor;
+package com.github.marivaldosena.casadocodigo.autores;
 
 public class AutorResponseDto {
     private String nome;

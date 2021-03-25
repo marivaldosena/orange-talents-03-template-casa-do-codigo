@@ -1,7 +1,6 @@
-package com.github.marivaldosena.casadocodigo.form;
+package com.github.marivaldosena.casadocodigo.autores;
 
-import com.github.marivaldosena.casadocodigo.entity.Autor;
-import com.github.marivaldosena.casadocodigo.entity.EmailUnicoConstraint;
+import com.github.marivaldosena.casadocodigo.constraints.EmailUnicoConstraint;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
