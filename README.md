@@ -205,3 +205,13 @@ Além disso, é necessário criar um método para receber os dados. A assinatura
 Tanto para o cadastro do autor quanto para o cadastro da categoria, foi necessário realizar uma validação de valor único no sistema. Neste caso, só muda um detalhe da query que estamos executando para fazer a verificação. E agora, será que você consegue criar seu validador customizado para reutilizá-lo nas validações de email de autor e nome de categoria?
 
 [Voltar ao menu](#tópicos)
+
+### Implementação de validador genérico
+
+Para criar o validador genérico, a única coisa que fiz foi criar uma anotação @interface e uma classe ConstraintValidator que implementa a interface anotada.
+
+Por intermédio da anotação, passei dois argumentos: um para a entidade e o outro para o campo.
+
+Comecei a implementar como um só validador ao invés de dois para evitar duplicidade de código. Portanto, utilizarei o link da solução anterior.
+
+O link de referência é: https://github.com/marivaldosena/orange-talents-03-template-casa-do-codigo/compare/v0.0.3...v0.0.4.
