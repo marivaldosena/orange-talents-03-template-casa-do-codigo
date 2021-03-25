@@ -37,6 +37,7 @@ O Zup Orange Talents é um programa da Zup para suprir a escassez de profissiona
     - [Implementação do Cadastro de email único](#implementação-do-cadastro-de-email-único)
     - [Alterações de implementação do cadastro de email único](#alterações-de-implementação-do-cadastro-de-email-único)
   - [Cadastro de categoria](#cadastro-de-categoria)
+    - [Implementação de cadastro de categoria](#implementação-de-cadastro-de-categoria)
 
 # Grade Curricular
 
@@ -173,5 +174,27 @@ Toda categoria precisa de um nome
 
 - Uma nova categoria cadastrada no sistema e status 200 de retorno
 - Caso alguma restrição não seja atendida, retorne 400 e um JSON informando os problemas de validação
+
+[Voltar ao menu](#tópicos)
+
+### Implementação de cadastro de categoria
+
+Acredito que antes de começar, eu faria uma mudança em relação a estrutura anterior, ao invés de utilizar pastas por stereotypes como tinha feito, mudarei os pacotes agrupados por funcionalidades, tais como: Autor, Categoria, etc. Dessa forma, ficará mais simples modificar um funcionalidade sem precisar procurar uma classe em outro pacote. Poderia ter feito isso inicialmente, mas preferi segregar de acordo com o que papel que desempenhavam para demonstrar minha linha de raciocínio e adotar uma arquitetura evolutiva nesta etapa por ser um cenário mais próximo ao encontrado no dia-a-dia de desenvolvimento.
+
+Para cadastrar uma categoria, é necessário criar uma entidade Categoria com o atributo nome do tipo String e com a anotação @Column(nullable = false, unique = true). Dessa forma, o Hibernate irá gerar um Data Definition Language (DDL) para a tabela indicando ao banco de dados que o atributo nome é obrigatório e não pode ser repetido. Outro ponto importante é criar dois construtores: um sem parâmetros para o Hibernate e outro com nome para consumo da aplicação.
+
+Após isso, criaria uma interface chamada CategoriaRepository que extende CrudRepository, assim conseguiria a capacidade de persistência em banco de dados.
+
+Para o cadastro da categoria, é interessante usar um Form Value Object chamado CadastroDeCategoriaForm que possui um atributo nome e um construtor para recebê-lo como parâmetro. O uso desta classe é para a validação na fronteira de entrada de dados e para limitar a inferência da estrutura interna de persistência que usamos. Dessa forma, usuários mal-intencionados teriam maior dificuldade em tentativas de ataques baseados nos conhecimentos que expomos por meio das entidades que enviamos diretamente.
+
+Apesar de não o enunciado não especificar o comprimento de caracteres do nome de categoria, acho interessante trabalhar com o intervalo de 2 a 120. Por este motivo, utilizaria as anotações @NotNull (para evitar que o campo seja nulo), @NotEmpty (para evitar que esteja vazio) e/ou @Size(min = 2, max = 120) para delimitar o comprimento.
+
+Para a resposta do cadastro, também utilizaria outra classe ao invés da entidade Categoria. No entanto, neste caso seria um Data Transfer Object (DTO) para personalizar a resposta e esconder detalhes que não queremos enviar ao cliente, tais como: identificador, data de criação do recurso, entre outros.
+
+Além desses elementos, criaria um controlador chamado CategoriaController para lidar com as requisições HTTP. Este controlador possuiria um atributo do tipo CategoriaRepository e um construtor para acomodar este parâmetro.
+
+Além disso, é necessário criar um método para receber os dados. A assinatura do método seria: public ResponseEntity<CategoriaDto> cadastrarCategoria(@RequestBody @Valid CadastroDeCategoriaForm form, URIComponentsBuilder uriBuilder). Este método retornará um ResponseEntity com o tipo genérico CategoriaDto e aceitará um CadastroDeCategoriaForm para validação de dados e um URIComponentsBuilder para gerar URIs personalizados para serem inseridos no cabeçalho de resposta informando a URI do recurso recém-criado. Este método terá a anotação @PostMapping para receber requisições via POST.
+
+É interessante anotar o controlador com @RequestMapping e informar a URL padrão para ele. Sugiro usar um atributo ou método estático para conter a String da URL. Dessa forma, se precisarmos mudar a URL, será realizada em apenas um ponto do controlador e será refletido automaticamente nos outros, vide cabeçalho Location com a URI do recurso.
 
 [Voltar ao menu](#tópicos)
