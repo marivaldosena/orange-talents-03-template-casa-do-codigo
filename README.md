@@ -38,6 +38,7 @@ O Zup Orange Talents é um programa da Zup para suprir a escassez de profissiona
     - [Alterações de implementação do cadastro de email único](#alterações-de-implementação-do-cadastro-de-email-único)
   - [Cadastro de categoria](#cadastro-de-categoria)
     - [Implementação de cadastro de categoria](#implementação-de-cadastro-de-categoria)
+  - [Cadastro de validador genérico](#cadastro-de-validador-genérico)
 
 # Grade Curricular
 
@@ -196,5 +197,11 @@ Além desses elementos, criaria um controlador chamado CategoriaController para 
 Além disso, é necessário criar um método para receber os dados. A assinatura do método seria: public ResponseEntity<CategoriaDto> cadastrarCategoria(@RequestBody @Valid CadastroDeCategoriaForm form, URIComponentsBuilder uriBuilder). Este método retornará um ResponseEntity com o tipo genérico CategoriaDto e aceitará um CadastroDeCategoriaForm para validação de dados e um URIComponentsBuilder para gerar URIs personalizados para serem inseridos no cabeçalho de resposta informando a URI do recurso recém-criado. Este método terá a anotação @PostMapping para receber requisições via POST.
 
 É interessante anotar o controlador com @RequestMapping e informar a URL padrão para ele. Sugiro usar um atributo ou método estático para conter a String da URL. Dessa forma, se precisarmos mudar a URL, será realizada em apenas um ponto do controlador e será refletido automaticamente nos outros, vide cabeçalho Location com a URI do recurso.
+
+[Voltar ao menu](#tópicos)
+
+## Cadastro de validador genérico
+
+Tanto para o cadastro do autor quanto para o cadastro da categoria, foi necessário realizar uma validação de valor único no sistema. Neste caso, só muda um detalhe da query que estamos executando para fazer a verificação. E agora, será que você consegue criar seu validador customizado para reutilizá-lo nas validações de email de autor e nome de categoria?
 
 [Voltar ao menu](#tópicos)
