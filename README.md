@@ -40,6 +40,7 @@ O Zup Orange Talents é um programa da Zup para suprir a escassez de profissiona
     - [Implementação de cadastro de categoria](#implementação-de-cadastro-de-categoria)
     - [Cadastro de validador genérico](#cadastro-de-validador-genérico)
   - [Criar um novo livro](#criar-um-novo-livro)
+    - [Implementação de Criar um novo livro](#implementação-de-criar-um-novo-livro)
 
 # Grade Curricular
 
@@ -253,5 +254,25 @@ Nesta atividade, você será responsável pela criação de livros.
 
 - Um novo livro precisa ser criado e status 200 retornado
 - Caso alguma restrição não seja atendida, retorne 400 e um json informando os problemas de validação
+
+[Voltar ao menu](#tópicos)
+
+### Implementação de Criar um novo livro
+
+Para o recurso Livro, criaria uma entidade Livro para a persistência de dados que conteria os seguintes campos:
+
+- titulo do tipo String com anotação @Column(nullable = false, unique = true) para que o título seja obrigatório e único.
+- resumo do tipo String com anotação @Column(nullable = false, length = 500) para que o resumo seja obrigatório e possua comprimento máximo de 500 caracteres.
+- sumario do tipo String e com anotação @Type("org.hibernate.type.Type.TextType") para que o sumário seja armazenado como um elemento do tipo SQL TEXT (ou equivalente), ou seja, virtualmente ilimitado.
+- preco do tipo BigDecimal com anotação @Column(nullable = false).
+- numeroDePaginas do tipo Integer com a anotação @Column(name = "numero_paginas", nullable = false) e @Min(100) para que o número de páginas seja obrigatório e com o valor mínimo de 100 páginas.
+- isbn do tipo String com a anotação @Column(nullable = false, unique = true) para que o ISBN seja único e obrigatório.
+- dataDePublicacao do tipo LocalDateTime. Como não foi especificado que a data é obrigatória, não colocarei anotação na entidade.
+- categoria do tipo Categoria com anotação @ManyToOne para que sinalize ao banco de dados que a tabela Livros possui chave estrangeira que referencia à tabela Categorias, ou seja, um livro pertence a uma categoria e uma categoria possui diversos livros.
+- autor do tipo Autor com anotação @ManyToOne, ou seja, é um relacionamento um-para-muitos como Categoria.
+
+Após a entidade Autor, criaria um repositório para livro e um controlador. O repositório seria uma interface que herdaria de CrudRepository. O controlador terá um método para criar livros com a anotação @PostMapping. Os parâmetros do método de criação de autores seriam um Form Value Object para validação de dados e um URIComponentsBuilder para geração de URI para o recurso recém-criado e seria criado um cabeçalho Location com o valor.
+
+O passo-a-passo deste recurso não difere muito dos recursos Autor e Categoria, ou seja, é necessário criar um DTO para exposição de dados e um Form Value Object (ou DTO) para validação na fronteira de entrada de dados.
 
 [Voltar ao menu](#tópicos)
