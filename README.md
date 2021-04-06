@@ -43,6 +43,7 @@ O Zup Orange Talents é um programa da Zup para suprir a escassez de profissiona
     - [Implementação de Criar um novo livro](#implementação-de-criar-um-novo-livro)
     - [Alterações de implementação de Criar um novo livro](#alterações-de-implementação-de-criar-um-novo-livro)
   - [Exibir lista de livros](#exibir-lista-de-livros)
+    - [Implementação de Exibir lista de livros](#implementação-de-exibir-lista-de-livros)
 
 # Grade Curricular
 
@@ -172,13 +173,13 @@ Toda categoria precisa de um nome
 
 ### Restrições
 
-- O nome é obrigatório
-- O nome não pode ser duplicado
+- <span style="color: green;">&check;</span> O nome é obrigatório
+- <span style="color: green;">&check;</span> O nome não pode ser duplicado
 
 ### Resultado esperado
 
-- Uma nova categoria cadastrada no sistema e status 200 de retorno
-- Caso alguma restrição não seja atendida, retorne 400 e um JSON informando os problemas de validação
+- <span style="color: green;">&check;</span> Uma nova categoria cadastrada no sistema e status 200 de retorno
+- <span style="color: green;">&check;</span> Caso alguma restrição não seja atendida, retorne 400 e um JSON informando os problemas de validação
 
 [Voltar ao menu](#tópicos)
 
@@ -228,34 +229,34 @@ Nesta atividade, você será responsável pela criação de livros.
 
 ### Necessidades
 
-- Um título
-- Um resumo do que vai ser encontrado no livro
-- Um sumário de tamanho livre. O texto deve entrar no formato markdown, que é uma string. - Dessa forma ele pode ser formatado depois da maneira apropriada.
-- Preço do livro
-- Número de páginas
-- Isbn(identificador do livro)
-- Data que ele deve entrar no ar(de publicação)
-- Um livro pertence a uma categoria
-- Um livro é de um autor
+- <span style="color: green;">&check;</span> Um título
+- <span style="color: green;">&check;</span> Um resumo do que vai ser encontrado no livro
+- <span style="color: green;">&check;</span> Um sumário de tamanho livre. O texto deve entrar no formato markdown, que é uma string. - Dessa forma ele pode ser formatado depois da maneira apropriada.
+- <span style="color: green;">&check;</span> Preço do livro
+- <span style="color: green;">&check;</span> Número de páginas
+- <span style="color: green;">&check;</span> Isbn(identificador do livro)
+- <span style="color: green;">&check;</span> Data que ele deve entrar no ar(de publicação)
+- <span style="color: green;">&check;</span> Um livro pertence a uma categoria
+- <span style="color: green;">&check;</span> Um livro é de um autor
 
 ### Restrições
 
-- Título é obrigatório
-- Título é único
-- Resumo é obrigatório e tem no máximo 500 caracteres
-- Sumário é de tamanho livre.
-- Preço é obrigatório e o mínimo é de 20
-- Número de páginas é obrigatória e o mínimo é de 100
-- Isbn é obrigatório, formato livre
-- Isbn é único
-- Data que vai entrar no ar precisa ser no futuro
-- A categoria não pode ser nula
-- O autor não pode ser nulo
+- <span style="color: green;">&check;</span> Título é obrigatório
+- <span style="color: green;">&check;</span> Título é único
+- <span style="color: green;">&check;</span> Resumo é obrigatório e tem no máximo 500 caracteres
+- <span style="color: green;">&check;</span> Sumário é de tamanho livre.
+- <span style="color: green;">&check;</span> Preço é obrigatório e o mínimo é de 20
+- <span style="color: green;">&check;</span> Número de páginas é obrigatória e o mínimo é de 100
+- <span style="color: green;">&check;</span> Isbn é obrigatório, formato livre
+- <span style="color: green;">&check;</span> Isbn é único
+- <span style="color: green;">&check;</span> Data que vai entrar no ar precisa ser no futuro
+- <span style="color: green;">&check;</span> A categoria não pode ser nula
+- <span style="color: green;">&check;</span> O autor não pode ser nulo
 
 ### Resultado esperado
 
-- Um novo livro precisa ser criado e status 200 retornado
-- Caso alguma restrição não seja atendida, retorne 400 e um json informando os problemas de validação
+- <span style="color: green;">&check;</span> Um novo livro precisa ser criado e status 200 retornado
+- <span style="color: green;">&check;</span> Caso alguma restrição não seja atendida, retorne 400 e um json informando os problemas de validação
 
 [Voltar ao menu](#tópicos)
 
@@ -301,6 +302,16 @@ Para que seja fácil pegar um id do livro, vamos exibir a lista de livros cadast
 
 ### Resultado esperado
 
-- um json com a lista de livros com id e nome do livro
+- <span style="color: red;">&cross;</span> um json com a lista de livros com id e nome do livro
+
+[Voltar ao menu](#tópicos)
+
+### Implementação de Exibir lista de livros
+
+Para resolver esta atividade, criaria um outro DTO somente com os campos título e identificador de livro. Estes seriam disponibilizados por um endpoint específico.
+
+Para criar um endpoint específico para a listagem de livros, é necessário criar um outro método no controlador para Livros com a anotação @GetMappping. 
+
+A atividade não especifica se devemos usar paginação, ordenação ou outro tipo de funcionalidade. Portanto, não implementarei neste momento.
 
 [Voltar ao menu](#tópicos)
