@@ -1,5 +1,6 @@
 package com.github.marivaldosena.casadocodigo.erros;
 
+import com.github.marivaldosena.casadocodigo.livros.LivroInexistenteException;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.http.HttpStatus;
@@ -32,6 +33,16 @@ public class ErroDeValidacaoHandler {
             listaDeErros.add(dto);
         });
 
+        return new ErrosDto(listaDeErros);
+    }
+
+    @ResponseStatus(code = HttpStatus.NOT_FOUND)
+    @ExceptionHandler(LivroInexistenteException.class)
+    public ErrosDto handle(LivroInexistenteException exception) {
+        List<CampoComErroDto> listaDeErros = new ArrayList<>();
+        String mensagem = messageSource.getMessage("LivroInexistenteException", new Object[]{exception.getLocalizedMessage()}, LocaleContextHolder.getLocale());
+        CampoComErroDto dto = new CampoComErroDto("id", mensagem);
+        listaDeErros.add(dto);
         return new ErrosDto(listaDeErros);
     }
 }

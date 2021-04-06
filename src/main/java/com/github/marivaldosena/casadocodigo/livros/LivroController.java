@@ -12,6 +12,7 @@ import javax.validation.Valid;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
@@ -45,5 +46,16 @@ public class LivroController {
         livroRepository.save(livro);
         URI uri = uriBuilder.path(CAMINHO_DO_RECURSO + "/{id}").buildAndExpand(livro.getId()).toUri();
         return ResponseEntity.ok().header("Location", uri.toString()).body(new LivroDto(livro));
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<LivroDto> obterDetalhesDeLivro(@PathVariable("id") Long id) {
+        Optional<Livro> livro = livroRepository.findById(id);
+
+        if (livro.isPresent()) {
+            return ResponseEntity.ok(new LivroDto(livro.get()));
+        }
+
+        throw new LivroInexistenteException(id, "Livro inexistente");
     }
 }
