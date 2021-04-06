@@ -1,5 +1,6 @@
 package com.github.marivaldosena.casadocodigo.livros;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.github.marivaldosena.casadocodigo.autores.Autor;
 import com.github.marivaldosena.casadocodigo.autores.AutorRepository;
 import com.github.marivaldosena.casadocodigo.categorias.Categoria;
@@ -24,6 +25,8 @@ public class LivroForm {
     @Size(max = 500)
     private String resumo;
 
+    @NotNull
+    @NotEmpty
     private String sumario;
 
     @NotNull
@@ -39,8 +42,10 @@ public class LivroForm {
     @ValorUnico(entidade = Livro.class, campo = "isbn")
     private String isbn;
 
+    @NotNull
     @FutureOrPresent
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "dd/MM/yyyy HH:mm:ss", shape = JsonFormat.Shape.STRING)
+    @DateTimeFormat(pattern = "dd/MM/yyyy HH:mm:ss")
     private LocalDateTime dataDePublicacao;
 
     @NotNull
@@ -62,20 +67,26 @@ public class LivroForm {
      * @param preco Preço unitário.
      * @param numeroDePaginas Número de páginas.
      * @param isbn ISBN em formato livre.
-     * @param dataDePublicacao Data de publicação do livro.
      * @param categoria Nome da categoria.
      * @param autor E-mail do autor.
      */
-    public LivroForm(String titulo, String resumo, String sumario, BigDecimal preco, Integer numeroDePaginas, String isbn, LocalDateTime dataDePublicacao, String categoria, String autor) {
+    public LivroForm(String titulo, String resumo, String sumario, BigDecimal preco, Integer numeroDePaginas, String isbn, String categoria, String autor) {
         this.titulo = titulo;
         this.resumo = resumo;
         this.sumario = sumario;
         this.preco = preco;
         this.numeroDePaginas = numeroDePaginas;
         this.isbn = isbn;
-        this.dataDePublicacao = dataDePublicacao;
         this.categoria = categoria;
         this.autor = autor;
+    }
+
+    /**
+     * O Jackson requer um método setter para desserializar o JSON em formato de data personalizado.
+     * @param dataDePublicacao Data de publicação.
+     */
+    public void setDataDePublicacao(LocalDateTime dataDePublicacao) {
+        this.dataDePublicacao = dataDePublicacao;
     }
 
     public String getTitulo() {
