@@ -42,6 +42,7 @@ O Zup Orange Talents é um programa da Zup para suprir a escassez de profissiona
   - [Criar um novo livro](#criar-um-novo-livro)
     - [Implementação de Criar um novo livro](#implementação-de-criar-um-novo-livro)
     - [Alterações de implementação de Criar um novo livro](#alterações-de-implementação-de-criar-um-novo-livro)
+  - [Exibir lista de livros](#exibir-lista-de-livros)
 
 # Grade Curricular
 
@@ -291,5 +292,15 @@ Há outra forma de incluir as entidades Autor e Categoria no Form Value Object, 
 Durante o desenvolvimento, criei outra validação genérica (Constraint) para verificar a existência de autores e categorias.
 
 Achei interessante utilizar uma classe para a criação de Livros usando o padrão Builder, já que há diversos atributos obrigatórios e isso me permitiu simplificar a geração de livros no método toEntity do Form Value Object.
+
+[Voltar ao menu](#tópicos)
+
+## Exibir lista de livros
+
+Para que seja fácil pegar um id do livro, vamos exibir a lista de livros cadastrados.
+
+### Resultado esperado
+
+- um json com a lista de livros com id e nome do livro
 
 [Voltar ao menu](#tópicos)
