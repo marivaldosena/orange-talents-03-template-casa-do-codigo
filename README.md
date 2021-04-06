@@ -41,6 +41,7 @@ O Zup Orange Talents é um programa da Zup para suprir a escassez de profissiona
     - [Cadastro de validador genérico](#cadastro-de-validador-genérico)
   - [Criar um novo livro](#criar-um-novo-livro)
     - [Implementação de Criar um novo livro](#implementação-de-criar-um-novo-livro)
+    - [Alterações de implementação de Criar um novo livro](#alterações-de-implementação-de-criar-um-novo-livro)
 
 # Grade Curricular
 
@@ -274,5 +275,21 @@ Para o recurso Livro, criaria uma entidade Livro para a persistência de dados q
 Após a entidade Autor, criaria um repositório para livro e um controlador. O repositório seria uma interface que herdaria de CrudRepository. O controlador terá um método para criar livros com a anotação @PostMapping. Os parâmetros do método de criação de autores seriam um Form Value Object para validação de dados e um URIComponentsBuilder para geração de URI para o recurso recém-criado e seria criado um cabeçalho Location com o valor.
 
 O passo-a-passo deste recurso não difere muito dos recursos Autor e Categoria, ou seja, é necessário criar um DTO para exposição de dados e um Form Value Object (ou DTO) para validação na fronteira de entrada de dados.
+
+[Voltar ao menu](#tópicos)
+
+### Alterações de implementação de Criar um novo livro
+
+Tive que inserir anotações de obrigatoriedade de dados em sumário e data de publicação já que eram obrigatórias de fato.
+
+No caso de publicação, é necessário inserir anotação adicional. Neste caso, o JsonFormat com parâmetros pattern para formato personalizado e shape para String.
+
+**Observação:** *o Jackson necessita de um método setter para desserializar uma data em formato personalizado e não pelo construtor.*
+
+Há outra forma de incluir as entidades Autor e Categoria no Form Value Object, no entanto, é necessário a utilização de EntityManager ao invés de repositórios. Por um lado simplifica o número de dependências externas do controlador de Livros, mas aumenta a complexidade com Queries e/ou TypedQueries no método toEntity do Form Value Object. Optei pela abordagem com repositórios, já que possuem métodos de busca personalizada.
+
+Durante o desenvolvimento, criei outra validação genérica (Constraint) para verificar a existência de autores e categorias.
+
+Achei interessante utilizar uma classe para a criação de Livros usando o padrão Builder, já que há diversos atributos obrigatórios e isso me permitiu simplificar a geração de livros no método toEntity do Form Value Object.
 
 [Voltar ao menu](#tópicos)
