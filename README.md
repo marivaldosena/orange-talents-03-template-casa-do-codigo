@@ -46,6 +46,7 @@ O Zup Orange Talents é um programa da Zup para suprir a escassez de profissiona
   - [Exibir lista de livros](#exibir-lista-de-livros)
     - [Implementação de Exibir lista de livros](#implementação-de-exibir-lista-de-livros)
   - [Página de detalhe de livro](#página-de-detalhe-de-livro)
+    - [Implementação de Página de detalhe de livro](#implementação-de-página-de-detalhe-de-livro)
 
 # Grade Curricular
 
@@ -336,5 +337,17 @@ Precisamos criar uma página com as mesmas informações que encontramos na pág
 ### Resultado esperado
 
 - <span style="color: red;">&cross;</span> Todos os detalhes para que o front possa montar a página
+
+[Voltar ao menu](#tópicos)
+
+### Implementação de Página de detalhe de livro
+
+Para exibir os detalhes de um livro, criaria um DTO com todos os dados necessários para exibição.
+
+Observação: Já fiz isso na criação de livros.
+
+Disponibilizaria o endpoint com a criação de um método no controlador de livros. A anotação que utilizaria para este método seria a @GetMapping("/{id}") e ele teria um parâmetro do tipo Long.
+
+Faria a busca do item usando o repositório de livros e verificaria se existe. Em caso positivo, retornaria o DTO com os dados do item. Em caso negativo, retornaria uma resposta de erro Not Found (404).
 
 [Voltar ao menu](#tópicos)
