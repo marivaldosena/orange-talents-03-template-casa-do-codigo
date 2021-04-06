@@ -1,6 +1,10 @@
 package com.github.marivaldosena.casadocodigo.categorias;
 
+import com.github.marivaldosena.casadocodigo.livros.Livro;
+
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "categorias")
@@ -11,6 +15,9 @@ public class Categoria {
 
     @Column(nullable = false, unique = true, length = 120)
     private String nome;
+
+    @OneToMany(mappedBy = "categoria")
+    private List<Livro> livros;
 
     /**
      * @deprecated Hibernate only.
@@ -24,6 +31,7 @@ public class Categoria {
      */
     public Categoria(String nome) {
         this.nome = nome;
+        this.livros = new ArrayList<>();
     }
 
     public Long getId() {
@@ -32,5 +40,9 @@ public class Categoria {
 
     public String getNome() {
         return nome;
+    }
+
+    public List<Livro> getLivros() {
+        return livros;
     }
 }

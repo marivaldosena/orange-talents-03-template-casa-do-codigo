@@ -1,7 +1,11 @@
 package com.github.marivaldosena.casadocodigo.autores;
 
+import com.github.marivaldosena.casadocodigo.livros.Livro;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "autores")
@@ -22,6 +26,9 @@ public class Autor {
     @Column(nullable = false)
     private LocalDateTime instante;
 
+    @OneToMany(mappedBy = "autor")
+    private List<Livro> livros;
+
     /**
      * @deprecated Hibernate only.
      */
@@ -39,6 +46,7 @@ public class Autor {
         this.email = email;
         this.descricao = descricao;
         this.instante = LocalDateTime.now();
+        this.livros = new ArrayList<>();
     }
 
     public Long getId() {
@@ -59,5 +67,9 @@ public class Autor {
 
     public LocalDateTime getInstante() {
         return instante;
+    }
+
+    public List<Livro> getLivros() {
+        return livros;
     }
 }

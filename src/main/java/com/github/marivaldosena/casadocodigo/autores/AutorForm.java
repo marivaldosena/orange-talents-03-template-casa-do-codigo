@@ -7,7 +7,7 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-public class CadastroDeAutorForm {
+public class AutorForm {
     @NotNull
     @Size(min = 2, max = 120)
     private String nome;
@@ -28,7 +28,7 @@ public class CadastroDeAutorForm {
      * @param email E-mail do autor.
      * @param descricao Breve descrição.
      */
-    public CadastroDeAutorForm(String nome, String email, String descricao) {
+    public AutorForm(String nome, String email, String descricao) {
         this.nome = nome;
         this.email = email;
         this.descricao = descricao;

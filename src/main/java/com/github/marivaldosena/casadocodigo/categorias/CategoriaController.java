@@ -25,7 +25,7 @@ public class CategoriaController {
 
     @PostMapping
     @Transactional
-    public ResponseEntity<CategoriaDto> cadastrarCategoria(@RequestBody @Valid CadastroDeCategoriaForm form, UriComponentsBuilder uriBuilder) {
+    public ResponseEntity<CategoriaDto> cadastrarCategoria(@RequestBody @Valid CategoriaForm form, UriComponentsBuilder uriBuilder) {
         Categoria categoria = form.toEntity();
         categoriaRepository.save(categoria);
         URI uri = uriBuilder.path(CAMINHO_DO_RECURSO + "/{id}").buildAndExpand(categoria.getId()).toUri();

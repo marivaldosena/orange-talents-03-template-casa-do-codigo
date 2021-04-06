@@ -7,27 +7,25 @@ import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 import java.util.List;
 
-public class ValorUnicoValidator implements ConstraintValidator<ValorUnico, String> {
+public class ExisteValidator implements ConstraintValidator<Existe, String> {
     @PersistenceContext
     private EntityManager manager;
 
-    private String campo;
     private Class<?> entidade;
-
-    @Override
-    public void initialize(ValorUnico valorUnico) {
-        this.campo = valorUnico.campo();
-        this.entidade = valorUnico.entidade();
-    }
+    private String campo;
 
     @Override
     public boolean isValid(String valor, ConstraintValidatorContext context) {
-        String jpql = "SELECT 1 FROM " + entidade.getName() + " WHERE " + campo.toLowerCase() + " = LOWER(:valor)";
+        String jpql = "SELECT 1 FROM " + entidade.getName() + " WHERE LOWER(" + campo + ") = :valor";
         Query query = manager.createQuery(jpql);
-        query.setParameter("valor", valor);
+        query.setParameter("valor", valor.toLowerCase());
+        List<?> listaDeResultados = query.getResultList();
+        return !listaDeResultados.isEmpty();
+    }
 
-        List<?> listaDeRegistros = query.getResultList();
-
-        return listaDeRegistros.isEmpty();
+    @Override
+    public void initialize(Existe constraint) {
+        this.campo = constraint.campo();
+        this.entidade = constraint.entidade();
     }
 }

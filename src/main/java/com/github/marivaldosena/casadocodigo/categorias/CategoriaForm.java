@@ -7,7 +7,7 @@ import com.sun.istack.NotNull;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
-public class CadastroDeCategoriaForm {
+public class CategoriaForm {
     @NotNull
     @NotEmpty
     @Size(min = 2, max = 120)
@@ -19,7 +19,7 @@ public class CadastroDeCategoriaForm {
      * @param nome Nome da categoria
      */
     @JsonCreator
-    public CadastroDeCategoriaForm(String nome) {
+    public CategoriaForm(String nome) {
         this.nome = nome;
     }
 
