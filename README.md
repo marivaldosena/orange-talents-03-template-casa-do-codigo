@@ -13,6 +13,7 @@
 [spring-url]: https://spring.io/
 [kotlin-url]: https://kotlinlang.org/
 [micronaut-url]: https://micronaut.io/
+[casa-do-codigo-detalhe-de-livro-url]: https://www.casadocodigo.com.br/products/livro-spring-boot
 
 <!-- Conteúdo -->
 # Zup Orange Talents
@@ -44,6 +45,7 @@ O Zup Orange Talents é um programa da Zup para suprir a escassez de profissiona
     - [Alterações de implementação de Criar um novo livro](#alterações-de-implementação-de-criar-um-novo-livro)
   - [Exibir lista de livros](#exibir-lista-de-livros)
     - [Implementação de Exibir lista de livros](#implementação-de-exibir-lista-de-livros)
+  - [Página de detalhe de livro](#página-de-detalhe-de-livro)
 
 # Grade Curricular
 
@@ -302,7 +304,7 @@ Para que seja fácil pegar um id do livro, vamos exibir a lista de livros cadast
 
 ### Resultado esperado
 
-- <span style="color: red;">&cross;</span> um json com a lista de livros com id e nome do livro
+- <span style="color: green;">&check;</span> um json com a lista de livros com id e nome do livro
 
 [Voltar ao menu](#tópicos)
 
@@ -313,5 +315,26 @@ Para resolver esta atividade, criaria um outro DTO somente com os campos título
 Para criar um endpoint específico para a listagem de livros, é necessário criar um outro método no controlador para Livros com a anotação @GetMappping. 
 
 A atividade não especifica se devemos usar paginação, ordenação ou outro tipo de funcionalidade. Portanto, não implementarei neste momento.
+
+[Voltar ao menu](#tópicos)
+
+## Página de detalhe de livro
+
+Implementação da página de detalhe
+Precisamos criar uma página com as mesmas informações que encontramos na página de detalhe da Casa do Código. Aqui está a página real => [Casa do Código][casa-do-codigo-detalhe-de-livro-url].
+
+**A ideia aqui é implementar todo código necessário para que tenhamos uma página com quase todas informações da página de detalhe da CDC.**
+
+### Necessidades
+
+- <span style="color: red;">&cross;</span> Ter um endpoint que em função de um id de livro retorne os detalhes necessários para montar a página.
+
+### Restrições
+
+- <span style="color: red;">&cross;</span> Se o id não existir é para retornar 404
+
+### Resultado esperado
+
+- <span style="color: red;">&cross;</span> Todos os detalhes para que o front possa montar a página
 
 [Voltar ao menu](#tópicos)
