@@ -47,6 +47,7 @@ O Zup Orange Talents é um programa da Zup para suprir a escassez de profissiona
     - [Implementação de Exibir lista de livros](#implementação-de-exibir-lista-de-livros)
   - [Página de detalhe de livro](#página-de-detalhe-de-livro)
     - [Implementação de Página de detalhe de livro](#implementação-de-página-de-detalhe-de-livro)
+  - [Cadastro de País e Estados](#cadastro-de-país-e-estados)
 
 # Grade Curricular
 
@@ -328,15 +329,15 @@ Precisamos criar uma página com as mesmas informações que encontramos na pág
 
 ### Necessidades
 
-- <span style="color: red;">&cross;</span> Ter um endpoint que em função de um id de livro retorne os detalhes necessários para montar a página.
+- <span style="color: green;">&check;</span> Ter um endpoint que em função de um id de livro retorne os detalhes necessários para montar a página.
 
 ### Restrições
 
-- <span style="color: red;">&cross;</span> Se o id não existir é para retornar 404
+- <span style="color: green;">&check;</span> Se o id não existir é para retornar 404
 
 ### Resultado esperado
 
-- <span style="color: red;">&cross;</span> Todos os detalhes para que o front possa montar a página
+- <span style="color: green;">&check;</span> Todos os detalhes para que o front possa montar a página
 
 [Voltar ao menu](#tópicos)
 
@@ -349,5 +350,29 @@ Observação: Já fiz isso na criação de livros.
 Disponibilizaria o endpoint com a criação de um método no controlador de livros. A anotação que utilizaria para este método seria a @GetMapping("/{id}") e ele teria um parâmetro do tipo Long.
 
 Faria a busca do item usando o repositório de livros e verificaria se existe. Em caso positivo, retornaria o DTO com os dados do item. Em caso negativo, retornaria uma resposta de erro Not Found (404).
+
+[Voltar ao menu](#tópicos)
+
+## Cadastro de País e Estados
+
+Precisamos de um cadastro simples de países e seus respectivos estados.
+
+Cada país tem um nome e cada estado tem um nome e pertence a um país.
+
+### Restrições para país
+
+- <span style="color: red;">&cross;</span> o nome é obrigatório
+- <span style="color: red;">&cross;</span> o nome é único
+
+### Restrição para estados
+
+- <span style="color: red;">&cross;</span> o nome é obrigatório
+- <span style="color: red;">&cross;</span> o nome é único para o mesmo país
+- <span style="color: red;">&cross;</span> o país é obrigatório
+
+### Resultado esperado
+
+- <span style="color: red;">&cross;</span> Dois endpoints para que seja possível cadastrar países e estados. Pode existir país sem estados associados.
+- <span style="color: red;">&cross;</span> Caso alguma restrição não seja atendida, retornar 400 e json com os problemas de validação.
 
 [Voltar ao menu](#tópicos)
