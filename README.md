@@ -50,6 +50,7 @@ O Zup Orange Talents é um programa da Zup para suprir a escassez de profissiona
   - [Cadastro de País e Estados](#cadastro-de-país-e-estados)
     - [Implementação de Cadastro de País e Estados](#implementação-de-cadastro-de-país-e-estados)
   - [Fluxo de pagamento](#fluxo-de-pagamento)
+    - [Implementação de Fluxo de pagamento](#implementação-de-fluxo-de-pagamento)
 
 # Grade Curricular
 
@@ -448,5 +449,33 @@ Os seguintes campos precisam ser preenchidos:
 ### Resultado esperado
 
 - <span style="color: red;">&cross;</span> Cliente cadastrado no sistema e status 200 retornado com o id do novo cliente como corpo da resposta.
+
+[Voltar ao menu](#tópicos)
+
+### Implementação de Fluxo de pagamento
+
+Para resolver a atividade do Fluxo de Pagamento, acredito que será necessário criar algumas entidades para o armazenar os dados de cliente, endereços, telefones e meios de pagamento.
+
+Podemos fazer isso criando algumas entidades e/ou Value Objects (VOs) ou podemos mantê-los na mesma entidade, já que não foi especificado se um mesmo cliente pode cadastrar mais de um endereço ou telefone.
+
+Se houver necessidade de cadastro de diversos endereços ou telefones, é interessante separar essas entidades e vinculá-las ao cliente por intermédio de um relacionamento um-para-muitos. Neste momento, optarei por manter na mesma entidade.
+
+A entidade cliente conterá os seguintes campos:
+
+- email do tipo String com anotação <code>@Column(nullable = false, unique = true)</code> para torná-lo obrigatório e único.
+- nome do tipo String com a anotação <code>@Column(nullable = false, unique = true)</code>. Idem de email.
+- Idem de email e nome.
+- endereco do tipo String com anotação <code>@Column(nullable = false)</code> para torná-lo obrigatório.
+- complemento terá a mesma anotação de endereco.
+- cidade do tipo Cidade cuja anotação será <code>@ManyToOne(fetch = FetchType.EAGER, optional = false)</code>. Além dessa, há a anotação <code>@JoinColumn(name = "cidade_id", nullable = false, foreignKey = @ForeignKey(name = "cidade_id_fk"))</code>. Dessa forma, será possível informar ao sistema que necessitamos desses dados assim que obtermos a entidade cliente.
+- pais do tipo Pais. As anotações serão semelhantes à cidade.
+- telefone do tipo String com anotação <code>@Column(nullable = false)</code>. Lembrando que, se houvesse necessidade de mais telefones, poderíamos criar uma entidade para telefone.
+- cep do tipo String com anotação <code>@Column(nullable = false)</code> para informar sua obrigatoriedade.
+
+Observação: é possível que um cliente possua mais de um endereço e estes podem ser em cidades diferentes. Por exemplo: um funcionário trabalha em São Paulo, mas reside em Osasco e poderia optar por receber o produto e/ou cobrança em um ou outro endereço, etc. No exemplo que citei, o relacionamento seria de muitos-para-muitos, pois uma cidade pode ter diversos clientes e um clientes pode ter endereços em mais de uma cidade. No entanto, o enunciado não abordou essa possibilidade e estamos tentando simplificar a aplicação ao invés de tentar adivinhar todos os possíveis cenários que, muito provavelmente, sejam limitados para este exercício.
+
+Já que a entidade cliente referencia pais e estado, devemos criar um atributo do tipo List de Cliente para termos navegação bidirecional. No entanto, não é obrigatório fazer isto se não houver necessidade deste tipo de navegação.
+
+Novamente será necessário criar repositório para persistência de dados, DTO para informar ao cliente o êxito do cadastro, Form Value Object para validação na fronteira de entrada de dados e controlador para atender às requisições dos clientes.
 
 [Voltar ao menu](#tópicos)
