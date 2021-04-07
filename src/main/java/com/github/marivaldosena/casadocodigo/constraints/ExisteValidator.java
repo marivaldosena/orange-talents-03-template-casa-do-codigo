@@ -16,13 +16,9 @@ public class ExisteValidator implements ConstraintValidator<Existe, String> {
 
     @Override
     public boolean isValid(String valor, ConstraintValidatorContext context) {
-        if (valor == null) {
-            return false;
-        }
-
-        String jpql = "SELECT 1 FROM " + entidade.getName() + " WHERE LOWER(" + campo + ") = :valor";
+        String jpql = "SELECT 1 FROM " + entidade.getName() + " WHERE LOWER(" + campo + ") = LOWER(:valor)";
         Query query = manager.createQuery(jpql);
-        query.setParameter("valor", valor.toLowerCase());
+        query.setParameter("valor", valor);
         List<?> listaDeResultados = query.getResultList();
         return !listaDeResultados.isEmpty();
     }

@@ -22,11 +22,7 @@ public class ValorUnicoValidator implements ConstraintValidator<ValorUnico, Stri
 
     @Override
     public boolean isValid(String valor, ConstraintValidatorContext context) {
-        if (valor == null) {
-            return false;
-        }
-
-        String jpql = "SELECT 1 FROM " + entidade.getName() + " WHERE " + campo.toLowerCase() + " = LOWER(:valor)";
+        String jpql = "SELECT 1 FROM " + entidade.getName() + " WHERE LOWER(" + campo + ") = LOWER(:valor)";
         Query query = manager.createQuery(jpql);
         query.setParameter("valor", valor);
 
