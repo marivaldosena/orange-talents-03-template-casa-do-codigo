@@ -48,6 +48,7 @@ O Zup Orange Talents é um programa da Zup para suprir a escassez de profissiona
   - [Página de detalhe de livro](#página-de-detalhe-de-livro)
     - [Implementação de Página de detalhe de livro](#implementação-de-página-de-detalhe-de-livro)
   - [Cadastro de País e Estados](#cadastro-de-país-e-estados)
+    - [Implementação de Cadastro de País e Estados](#implementação-de-cadastro-de-país-e-estados)
 
 # Grade Curricular
 
@@ -374,5 +375,36 @@ Cada país tem um nome e cada estado tem um nome e pertence a um país.
 
 - <span style="color: red;">&cross;</span> Dois endpoints para que seja possível cadastrar países e estados. Pode existir país sem estados associados.
 - <span style="color: red;">&cross;</span> Caso alguma restrição não seja atendida, retornar 400 e json com os problemas de validação.
+
+[Voltar ao menu](#tópicos)
+
+### Implementação de Cadastro de País e Estados
+
+Para o cadastro de países e estados será necessário a criação de duas entidades: País e Estado que possuem relacionamento entre si.
+
+Os campos de utilizaria para País, seriam:
+
+- nome do tipo String com a anotação <code>@Column(nullable = false)</code> para contemplar o nome do país e informar sua obrigatoriedade.
+- estados do tipo <code>List&lt;Estado&gt;</code> com anotação <code>@OneToMany(mappedBy = "estado")</code> para informar quais são os estados pertencentes.
+
+Na entidade Estado, criaria os seguintes atributos:
+
+- nome do tipo String com a anotação <code>@Column(nullable = false)</code> para armazenar o nome do estado e a obrigatoriedade do preenchimento.
+- pais do tipo Pais com a anotação <code>@ManyToOne(fetch = FetchType.EAGER, optional = false)</code> para carregar o país assim que o estado é carregado ao invés do comportamento Lazy que só faz a busca quando o relacionamento é acessado. Além dessa, também anotaria com <code>@JoinColumn(name = "pais_id", nullable = false, foreignKey = @ForeignKey(name = "pais_id_fk"))</code> para que o campo pais_id seja obrigatório e cujo indexador de chave estrangeira seja referenciado como pais_id_fk.
+
+Para que um pais tenha um nome de estado único, e para que outros países possam ter o mesmo nome de estado, é necessário anotar a entidade com:
+
+```java
+@Entity
+@Table(name = "estados", 
+  uniqueConstraints = @UniqueConstraint(
+    name = "estado_unico_por_pais_uc", columnNames = {"pais_id", "nome"})).
+```
+
+Além dessas entidades, é necessário criar dois repositórios, sendo um para o país e o outro para o estado. Acredito que não haja a necessidade de dois controladores para gerenciar essas entidades, mas apenas um, já que são intimamente ligados.
+
+Outro ponto que vale frisar é o uso de Form Value Objects para a validação na fronteira de entrada de dados, isto é, como parâmetro dos métodos no controlador. Para personalizar a resposta é interessante usar DTOs com as informações que julgamos relevantes ao cliente.
+
+Outro ponto que talvez seja interessante é a utilização de um Constraint Validator personalizado para saber se o estado é único ou inexistente no país em questão.
 
 [Voltar ao menu](#tópicos)
