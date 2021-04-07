@@ -28,4 +28,12 @@ public class PaisController {
         URI uri = uriBuilder.path("/api/paises/{id}").buildAndExpand(pais.getId()).toUri();
         return ResponseEntity.ok().header("Location", uri.toString()).body(new PaisDto(pais));
     }
+
+    @PostMapping("/api/estados")
+    public ResponseEntity<EstadoDto> cadastrarEstado(@RequestBody @Valid EstadoForm form, UriComponentsBuilder uriBuilder) {
+        Estado estado = form.toEntity(paisRepository, estadoRepository);
+        estadoRepository.save(estado);
+        URI uri = uriBuilder.path("/api/estados/{id}").buildAndExpand(estado.getId()).toUri();
+        return ResponseEntity.ok().header("Location", uri.toString()).body(new EstadoDto(estado));
+    }
 }

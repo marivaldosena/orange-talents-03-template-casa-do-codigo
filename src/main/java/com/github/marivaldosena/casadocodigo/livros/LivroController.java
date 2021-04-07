@@ -56,6 +56,6 @@ public class LivroController {
             return ResponseEntity.ok(new LivroDto(livro.get()));
         }
 
-        throw new LivroInexistenteException(id, "Livro inexistente");
+        throw new LivroInexistenteException("Livro inexistente");
     }
 }
