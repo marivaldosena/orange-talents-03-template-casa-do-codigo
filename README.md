@@ -385,7 +385,7 @@ Para o cadastro de países e estados será necessário a criação de duas entid
 Os campos de utilizaria para País, seriam:
 
 - nome do tipo String com a anotação <code>@Column(nullable = false)</code> para contemplar o nome do país e informar sua obrigatoriedade.
-- estados do tipo <code>List&lt;Estado&gt;</code> com anotação <code>@OneToMany(mappedBy = "estado")</code> para informar quais são os estados pertencentes.
+- estados do tipo <code>List&lt;Estado&gt;</code> com anotação <code>@OneToMany(mappedBy = "pais")</code> para informar quais são os estados pertencentes.
 
 Na entidade Estado, criaria os seguintes atributos:
 
