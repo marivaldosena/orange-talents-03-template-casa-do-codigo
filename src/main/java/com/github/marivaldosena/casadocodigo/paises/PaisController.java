@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import javax.transaction.Transactional;
 import javax.validation.Valid;
 import java.net.URI;
 
@@ -22,6 +23,7 @@ public class PaisController {
     }
 
     @PostMapping("/api/paises")
+    @Transactional
     public ResponseEntity<PaisDto> cadastrarPais(@RequestBody @Valid PaisForm form, UriComponentsBuilder uriBuilder) {
         Pais pais = form.toEntity();
         paisRepository.save(pais);
@@ -30,6 +32,7 @@ public class PaisController {
     }
 
     @PostMapping("/api/estados")
+    @Transactional
     public ResponseEntity<EstadoDto> cadastrarEstado(@RequestBody @Valid EstadoForm form, UriComponentsBuilder uriBuilder) {
         Estado estado = form.toEntity(paisRepository, estadoRepository);
         estadoRepository.save(estado);

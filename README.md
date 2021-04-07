@@ -49,6 +49,7 @@ O Zup Orange Talents é um programa da Zup para suprir a escassez de profissiona
     - [Implementação de Página de detalhe de livro](#implementação-de-página-de-detalhe-de-livro)
   - [Cadastro de País e Estados](#cadastro-de-país-e-estados)
     - [Implementação de Cadastro de País e Estados](#implementação-de-cadastro-de-país-e-estados)
+  - [Fluxo de pagamento](#fluxo-de-pagamento)
 
 # Grade Curricular
 
@@ -362,19 +363,19 @@ Cada país tem um nome e cada estado tem um nome e pertence a um país.
 
 ### Restrições para país
 
-- <span style="color: red;">&cross;</span> o nome é obrigatório
-- <span style="color: red;">&cross;</span> o nome é único
+- <span style="color: green;">&check;</span> o nome é obrigatório
+- <span style="color: green;">&check;</span> o nome é único
 
 ### Restrição para estados
 
-- <span style="color: red;">&cross;</span> o nome é obrigatório
-- <span style="color: red;">&cross;</span> o nome é único para o mesmo país
-- <span style="color: red;">&cross;</span> o país é obrigatório
+- <span style="color: green;">&check;</span> o nome é obrigatório
+- <span style="color: green;">&check;</span> o nome é único para o mesmo país
+- <span style="color: green;">&check;</span> o país é obrigatório
 
 ### Resultado esperado
 
-- <span style="color: red;">&cross;</span> Dois endpoints para que seja possível cadastrar países e estados. Pode existir país sem estados associados.
-- <span style="color: red;">&cross;</span> Caso alguma restrição não seja atendida, retornar 400 e json com os problemas de validação.
+- <span style="color: green;">&check;</span> Dois endpoints para que seja possível cadastrar países e estados. Pode existir país sem estados associados.
+- <span style="color: green;">&check;</span> Caso alguma restrição não seja atendida, retornar 400 e json com os problemas de validação.
 
 [Voltar ao menu](#tópicos)
 
@@ -406,5 +407,46 @@ Além dessas entidades, é necessário criar dois repositórios, sendo um para o
 Outro ponto que vale frisar é o uso de Form Value Objects para a validação na fronteira de entrada de dados, isto é, como parâmetro dos métodos no controlador. Para personalizar a resposta é interessante usar DTOs com as informações que julgamos relevantes ao cliente.
 
 Outro ponto que talvez seja interessante é a utilização de um Constraint Validator personalizado para saber se o estado é único ou inexistente no país em questão.
+
+[Voltar ao menu](#tópicos)
+
+## Fluxo de pagamento
+
+Agora vamos começar o processo de conclusão de compra. Primeiro vamos realizar um cadastro de clientes.
+
+Os seguintes campos precisam ser preenchidos:
+
+- email
+- nome
+- sobrenome
+- documento(cpf/cnpj)
+- endereco
+- complemento
+- cidade
+- país
+- estado(caso aquele pais tenha estado)
+- telefone
+- cep
+
+### Restrição
+
+- <span style="color: red;">&cross;</span> email obrigatório e com formato adequado
+- <span style="color: red;">&cross;</span> email é único no sistema
+- <span style="color: red;">&cross;</span> nome obrigatório
+- <span style="color: red;">&cross;</span> sobrenome obrigatório
+- <span style="color: red;">&cross;</span> documento(cpf/cnpj) obrigatório e só precisa ser um cpf ou cnpj
+- <span style="color: red;">&cross;</span> documento é único no sistema
+- <span style="color: red;">&cross;</span> endereco obrigatório
+- <span style="color: red;">&cross;</span> complemento obrigatório
+- <span style="color: red;">&cross;</span> cidade obrigatório
+- <span style="color: red;">&cross;</span> país obrigatório
+- <span style="color: red;">&cross;</span> se o país tiver estados, um estado precisa ser selecionado
+- <span style="color: red;">&cross;</span> estado (caso aquele pais tenha estado) - apenas se o país tiver cadastro de estados
+- <span style="color: red;">&cross;</span> telefone obrigatório
+- <span style="color: red;">&cross;</span> cep é obrigatório
+
+### Resultado esperado
+
+- <span style="color: red;">&cross;</span> Cliente cadastrado no sistema e status 200 retornado com o id do novo cliente como corpo da resposta.
 
 [Voltar ao menu](#tópicos)
