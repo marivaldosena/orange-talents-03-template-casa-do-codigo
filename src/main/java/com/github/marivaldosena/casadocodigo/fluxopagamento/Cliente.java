@@ -26,8 +26,6 @@ public class Cliente {
     @Column(nullable = false, unique = true)
     private String documento;
 
-    private String tipoDePessoa;
-
     @Column(nullable = false)
     private String endereco;
 
@@ -41,8 +39,8 @@ public class Cliente {
     @JoinColumn(name = "pais_id", nullable = false, foreignKey = @ForeignKey(name = "pais_id_fk"))
     private Pais pais;
 
-    @ManyToOne(fetch = FetchType.EAGER, optional = false)
-    @JoinColumn(name = "estado_id", nullable = false, foreignKey = @ForeignKey(name = "estado_id_fk"))
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "estado_id", foreignKey = @ForeignKey(name = "estado_id_fk"))
     private Estado estado;
 
     @Column(nullable = false)
@@ -54,12 +52,11 @@ public class Cliente {
     public Cliente() {
     }
 
-    public Cliente(String nome, String sobrenome, String email, String documento, String tipoDePessoa, String endereco, String complemento, String cidade, Pais pais, Estado estado, String telefone, String cep) {
+    public Cliente(String nome, String sobrenome, String email, String documento, String endereco, String complemento, String cidade, Pais pais, Estado estado, String telefone, String cep) {
         this.nome = nome;
         this.sobrenome = sobrenome;
         this.email = email;
         this.documento = documento;
-        this.tipoDePessoa = tipoDePessoa;
         this.endereco = endereco;
         this.complemento = complemento;
         this.cidade = cidade;
@@ -87,10 +84,6 @@ public class Cliente {
 
     public String getDocumento() {
         return documento;
-    }
-
-    public String getTipoDePessoa() {
-        return tipoDePessoa;
     }
 
     public String getEndereco() {

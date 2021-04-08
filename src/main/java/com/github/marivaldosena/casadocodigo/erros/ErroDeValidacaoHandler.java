@@ -1,5 +1,6 @@
 package com.github.marivaldosena.casadocodigo.erros;
 
+import com.github.marivaldosena.casadocodigo.fluxopagamento.EstadoInvalidoException;
 import com.github.marivaldosena.casadocodigo.livros.LivroInexistenteException;
 import com.github.marivaldosena.casadocodigo.paises.EstadoDuplicadoException;
 import org.springframework.context.MessageSource;
@@ -63,4 +64,22 @@ public class ErroDeValidacaoHandler {
         listaDeErros.add(dto);
         return new ErrosDto(listaDeErros);
     }
+
+    /**
+     * @deprecated Acredito que haja uma forma mais simples de lidar com exceções personalizadas.
+     * Talvez o caminho seja usar o padrão Strategy para lidar com diversas possíveis exceções ou
+     * utilizar Generics. Neste momento, manterei desse jeito e pesquisarei outras alternativas.
+     * @param exception Exceção de estado duplicado.
+     * @return ErrosDto para informar ao cliente o motivo do erro.
+     */
+    @ResponseStatus(code = HttpStatus.NOT_FOUND)
+    @ExceptionHandler(EstadoInvalidoException.class)
+    public ErrosDto handle(EstadoInvalidoException exception) {
+        List<CampoComErroDto> listaDeErros = new ArrayList<>();
+        String mensagem = messageSource.getMessage("EstadoInvalidoException", new Object[]{exception.getLocalizedMessage()}, LocaleContextHolder.getLocale());
+        CampoComErroDto dto = new CampoComErroDto("estado", mensagem);
+        listaDeErros.add(dto);
+        return new ErrosDto(listaDeErros);
+    }
+
 }

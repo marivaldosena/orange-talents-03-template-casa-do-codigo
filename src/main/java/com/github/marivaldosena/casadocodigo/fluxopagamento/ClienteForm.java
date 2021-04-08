@@ -1,13 +1,18 @@
 package com.github.marivaldosena.casadocodigo.fluxopagamento;
 
+import com.github.marivaldosena.casadocodigo.constraints.Documento;
 import com.github.marivaldosena.casadocodigo.constraints.Existe;
 import com.github.marivaldosena.casadocodigo.constraints.ValorUnico;
+import com.github.marivaldosena.casadocodigo.paises.Estado;
+import com.github.marivaldosena.casadocodigo.paises.EstadoRepository;
 import com.github.marivaldosena.casadocodigo.paises.Pais;
+import com.github.marivaldosena.casadocodigo.paises.PaisRepository;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
+import java.util.Optional;
 
 public class ClienteForm {
     @NotNull
@@ -27,6 +32,7 @@ public class ClienteForm {
     @NotNull
     @NotEmpty
     @ValorUnico(entidade = Cliente.class, campo = "documento")
+    @Documento
     private String documento;
 
     @NotNull
@@ -114,5 +120,41 @@ public class ClienteForm {
 
     public String getCep() {
         return cep;
+    }
+
+    public Cliente toEntity(PaisRepository paisRepository, EstadoRepository estadoRepository) {
+        Pais paisEncontrado = paisRepository.findByNome(pais).get();
+
+        ClienteBuilder builder = new ClienteBuilder()
+                .comNome(nome)
+                .comSobrenome(sobrenome)
+                .comEmail(email)
+                .comDocumento(documento)
+                .comEndereco(endereco)
+                .comComplemento(complemento)
+                .comCidade(cidade)
+                .comPais(paisEncontrado)
+                .comTelefone(telefone)
+                .comCep(cep);
+
+        /* País possui estados */
+        if (paisEncontrado.getEstados().size() > 0) {
+            if (estado == null) {
+                throw new EstadoInvalidoException("Estado inválido");
+            }
+
+            /* Verifica se estado é válido */
+            Optional<Estado> estadoEncontrado = paisEncontrado.getEstados().stream()
+                    .filter(e -> e.getNome().toLowerCase().compareTo(estado.toLowerCase()) == 0)
+                    .findFirst();
+
+            if (!estadoEncontrado.isPresent()) {
+                throw new EstadoInvalidoException("Estado inválido");
+            }
+
+            builder.comEstado(estadoEncontrado.get());
+        }
+
+        return builder.criar();
     }
 }
