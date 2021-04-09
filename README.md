@@ -14,9 +14,10 @@
 [kotlin-url]: https://kotlinlang.org/
 [micronaut-url]: https://micronaut.io/
 [casa-do-codigo-detalhe-de-livro-url]: https://www.casadocodigo.com.br/products/livro-spring-boot
+[projeto-mercado-livre-url]: https://github.com/marivaldosena/orange-talents-03-template-ecommerce
 
 <!-- Conteúdo -->
-# Zup Orange Talents
+# Zup Orange Talents | Projeto Casa do Código
 
 [![Zup Orange Talents][orange-talents-badge]][orange-talents-url]
 [![Java][java-badge]][java-url]
@@ -30,6 +31,7 @@ O Zup Orange Talents é um programa da Zup para suprir a escassez de profissiona
 
 - [Tópicos](#tópicos)
 - [Grade Curricular](#grade-curricular)
+- [Outros Projetos Relacionados](#outros-projetos-relacionados)
 - [Desafio Casa do Código](#desafio-casa-do-código)
 - [Atividades](#atividades)
   - [Cadastro novo autor](#cadastro-novo-autor)
@@ -67,6 +69,14 @@ Serão abordados os seguintes temas:
 
 [Voltar ao menu](#tópicos)
 
+# Outros Projetos Relacionados
+
+Há outros projetos com foco em conceitos, métodos de desenvolvimento e tecnologias específicos.
+
+Para visualizar o projeto do [Mercado Livre][#] é só clicar no link anterior.
+
+[Voltar ao menu](#tópicos)
+
 # Desafio Casa do Código
 
 Este primeiro desafio é uma forma de pôr em prática os conceitos 
@@ -75,6 +85,8 @@ ensinados ao longo das primeiras semanas.
 # Atividades
 
 Ao longo deste projeto, será necessário a realização de algumas atividades para atestar o conhecimento adquirido. As atividades devem ser resolvidas estritamente de acordo com o enunciado.
+
+[Voltar ao menu](#tópicos)
 
 ## Cadastro novo autor
 
@@ -431,24 +443,24 @@ Os seguintes campos precisam ser preenchidos:
 
 ### Restrição
 
-- <span style="color: red;">&cross;</span> email obrigatório e com formato adequado
-- <span style="color: red;">&cross;</span> email é único no sistema
-- <span style="color: red;">&cross;</span> nome obrigatório
-- <span style="color: red;">&cross;</span> sobrenome obrigatório
-- <span style="color: red;">&cross;</span> documento(cpf/cnpj) obrigatório e só precisa ser um cpf ou cnpj
-- <span style="color: red;">&cross;</span> documento é único no sistema
-- <span style="color: red;">&cross;</span> endereco obrigatório
-- <span style="color: red;">&cross;</span> complemento obrigatório
-- <span style="color: red;">&cross;</span> cidade obrigatório
-- <span style="color: red;">&cross;</span> país obrigatório
-- <span style="color: red;">&cross;</span> se o país tiver estados, um estado precisa ser selecionado
-- <span style="color: red;">&cross;</span> estado (caso aquele pais tenha estado) - apenas se o país tiver cadastro de estados
-- <span style="color: red;">&cross;</span> telefone obrigatório
-- <span style="color: red;">&cross;</span> cep é obrigatório
+- <span style="color: green;">&check;</span> email obrigatório e com formato adequado
+- <span style="color: green;">&check;</span> email é único no sistema
+- <span style="color: green;">&check;</span> nome obrigatório
+- <span style="color: green;">&check;</span> sobrenome obrigatório
+- <span style="color: green;">&check;</span> documento(cpf/cnpj) obrigatório e só precisa ser um cpf ou cnpj
+- <span style="color: green;">&check;</span> documento é único no sistema
+- <span style="color: green;">&check;</span> endereco obrigatório
+- <span style="color: green;">&check;</span> complemento obrigatório
+- <span style="color: green;">&check;</span> cidade obrigatório
+- <span style="color: green;">&check;</span> país obrigatório
+- <span style="color: green;">&check;</span> se o país tiver estados, um estado precisa ser selecionado
+- <span style="color: green;">&check;</span> estado (caso aquele pais tenha estado) - apenas se o país tiver cadastro de estados
+- <span style="color: green;">&check;</span> telefone obrigatório
+- <span style="color: green;">&check;</span> cep é obrigatório
 
 ### Resultado esperado
 
-- <span style="color: red;">&cross;</span> Cliente cadastrado no sistema e status 200 retornado com o id do novo cliente como corpo da resposta.
+- <span style="color: green;">&check;</span> Cliente cadastrado no sistema e status 200 retornado com o id do novo cliente como corpo da resposta.
 
 [Voltar ao menu](#tópicos)
 
