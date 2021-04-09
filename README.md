@@ -73,7 +73,7 @@ Serão abordados os seguintes temas:
 
 Há outros projetos com foco em conceitos, métodos de desenvolvimento e tecnologias específicos.
 
-Para visualizar o projeto do [Mercado Livre][#] é só clicar no link anterior.
+Para visualizar o projeto do [Mercado Livre][projeto-mercado-livre-url] é só clicar no link anterior.
 
 [Voltar ao menu](#tópicos)
 
